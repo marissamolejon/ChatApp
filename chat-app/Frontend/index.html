@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CYF Chat</title>
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <h1>💬 Chat App</h1>
+        <div class="username-bar">
+          <label for="username-input">Your name:</label>
+          <input
+            id="username-input"
+            type="text"
+            placeholder="Anonymous"
+            maxlength="30"
+            autocomplete="off"
+          />
+        </div>
+      </header>
+
+      <main class="chat-container">
+        <ul id="message-list" class="message-list" aria-live="polite" aria-label="Chat messages">
+        </ul>
+      </main>
+
+      <footer class="message-form">
+        <input
+          id="message-input"
+          type="text"
+          placeholder="Type a message..."
+          maxlength="500"
+          autocomplete="off"
+          aria-label="Message text"
+        />
+        <button id="send-button" type="button">Send</button>
+      </footer>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
