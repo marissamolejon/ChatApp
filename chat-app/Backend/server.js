@@ -1,17 +1,22 @@
 const express = require("express");
-const cors = require("cors");
-const messagesRouter = require("./routes/messages");
+const router = express.Router();
+const { getMessages, addMessage } = require("../data/store");
 
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.use(cors());
-app.use(express.json());
-
-app.use("/messages", messagesRouter);
-
-app.get("/health", (req, res) => res.json({ status: "ok" }));
-
-app.listen(PORT, () => {
-  console.log(`Chat backend running on http://localhost:${PORT}`);
+// GET /messages
+router.get("/", (req, res) => {
+  res.json(getMessages());
 });
+
+// POST /messages
+router.post("/", (req, res) => {
+  const { username, text } = req.body;
+
+  if (!text || text.trim() === "") {
+    return res.status(400).json({ error: "Message text is required" });
+  }
+
+  const message = addMessage({ username, text: text.trim() });
+  res.status(201).json(message);
+});
+
+module.exports = router;
