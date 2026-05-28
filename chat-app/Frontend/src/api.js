@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:3000"; // swap for deployed URL
+const API_BASE = "https://adobopancitlumpia.sslip.io";
 
 export async function fetchMessages() {
   const res = await fetch(`${API_BASE}/messages`);
