@@ -1,4 +1,4 @@
-const API_BASE = "https://adobopancitlumpia.sslip.io";
+const API_BASE = "https://your-coolify-backend-url.sslip.io";
 
 export async function fetchMessages() {
   const res = await fetch(`${API_BASE}/messages`);
