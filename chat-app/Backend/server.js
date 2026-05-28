@@ -1,22 +1,24 @@
 const express = require("express");
-const router = express.Router();
-const { getMessages, addMessage } = require("../data/store");
+const cors = require("cors");
 
-// GET /messages
-router.get("/", (req, res) => {
-  res.json(getMessages());
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
+
+const messages = [];
+
+app.get("/messages", (req, res) => {
+  res.json(messages);
 });
 
-// POST /messages
-router.post("/", (req, res) => {
+app.post("/messages", (req, res) => {
   const { username, text } = req.body;
-
-  if (!text || text.trim() === "") {
-    return res.status(400).json({ error: "Message text is required" });
-  }
-
-  const message = addMessage({ username, text: text.trim() });
-  res.status(201).json(message);
+  if (!text) return res.status(400).json({ error: "text required" });
+  const msg = { id: Date.now(), username: username || "Anonymous", text, timestamp: new Date().toISOString() };
+  messages.push(msg);
+  res.status(201).json(msg);
 });
 
-module.exports = router;
+app.listen(PORT, () => console.log(`Running on http://localhost:${PORT}`));

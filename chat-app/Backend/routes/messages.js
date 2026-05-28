@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getMessages, addMessage } = require("../data/store");
+const { getMessages, addMessage } = require("../Data/store");
 
 // GET /messages
 router.get("/", (req, res) => {
