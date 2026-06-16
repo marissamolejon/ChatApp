@@ -1,17 +1,27 @@
-const API_BASE = "https://your-coolify-backend-url.sslip.io";
+const API_BASE = "http://localhost:3000";
 
 export async function fetchMessages() {
   const res = await fetch(`${API_BASE}/messages`);
-  if (!res.ok) throw new Error("Failed to fetch messages");
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch messages");
+  }
+
   return res.json();
 }
 
 export async function postMessage({ username, text }) {
   const res = await fetch(`${API_BASE}/messages`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({ username, text }),
   });
-  if (!res.ok) throw new Error("Failed to send message");
+
+  if (!res.ok) {
+    throw new Error("Failed to send message");
+  }
+
   return res.json();
 }
